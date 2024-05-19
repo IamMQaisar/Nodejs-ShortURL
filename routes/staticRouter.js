@@ -1,13 +1,17 @@
+// Router for static pages.
 const express = require("express");
 const router = express.Router();
-const URL = require("../models/url");
-// const {} = require("../controllers/url");
+// Import controller
+const {
+  handleStaticHome,
+  handleStaticSignup,
+  handleStaticSignin,
+} = require("../controllers/staticController");
 
-router.route("/").get(async (req, res) => {
-  const allurls = await URL.find({});
-  res.render("home",{urls: allurls});
-});
+// Routes
+router.route("/").get(handleStaticHome);
+router.route("/signup").get(handleStaticSignup);
+router.route("/signin").get(handleStaticSignin);
 
-
-
+// Export the router
 module.exports = router;
