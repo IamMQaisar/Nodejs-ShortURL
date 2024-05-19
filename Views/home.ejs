@@ -10,8 +10,10 @@
     </style>
     <title>Home</title>
   </head>
+  <!-- body section of the file -->
   <body>
     <H1>URL Shortner</H1>
+    <!-- Short URL Generation -->
     <div>
       <form method="POST" action="/url">
         <label for="">Enter your Original URL</label>
@@ -24,6 +26,7 @@
         <button type="submit">Generate</button>
       </form>
     </div>
+    <!-- Table for URLs -->
     <div>
       <% if (locals.urls) {%>
       <table>
@@ -44,7 +47,7 @@
                 href="http://localhost:8001/url/<%= url.shortId %>"
                 target="_blank"
                 ><%= url.shortId %>
-                </a>
+              </a>
             </td>
             <td><%= url.redirectURL %></td>
             <td><%= url.visitHistory.length%></td>

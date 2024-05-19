@@ -5,13 +5,12 @@ const { connecToMongoDB } = require("./connect");
 
 //imports for Authentication
 const cookieParser = require("cookie-parser");
-const {restrictToLoggedinUserOnly, checkAuth} = require("./middlewares/auth");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 
 // Import routes
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
-
 
 // Create an express app
 const app = express();
@@ -32,7 +31,6 @@ connecToMongoDB("mongodb://localhost:27017/short-url")
   .catch((err) => {
     console.log("Error connecting to MongoDB", err);
   });
-
 
 // Routes
 app.use("/", checkAuth, staticRoute);

@@ -1,9 +1,9 @@
-// imports
-const { v4: uuidv4 } = require("uuid");
+// imports the User model and uuid module
 const User = require("../models/user");
+const { v4: uuidv4 } = require("uuid");
 const { setUser } = require("../service/auth");
 
-// functions
+// functions for handling user signup and signin
 async function handleUserSignup(req, res) {
   const { name, email, password } = req.body;
   try {
@@ -31,5 +31,5 @@ async function handleUserSignin(req, res) {
   }
 }
 
-// exports
+// exports the functions
 module.exports = { handleUserSignup, handleUserSignin };

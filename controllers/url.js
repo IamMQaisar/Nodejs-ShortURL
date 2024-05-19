@@ -1,8 +1,8 @@
-// imports
-const shortid = require("shortid");
+// imports URL model and shortid module
 const URL = require("../models/url");
+const shortid = require("shortid");
 
-// functions
+// function for Generating new short URL
 async function handleGenerateNewShortURL(req, res) {
   const body = req.body;
   if (!body.url) {
@@ -18,6 +18,7 @@ async function handleGenerateNewShortURL(req, res) {
   return res.redirect("/");
 }
 
+// function for handling redirect URL
 async function handleRidrectURL(req, res) {
   const shortId = req.params.shortId;
   const entry = await URL.findOneAndUpdate(
@@ -32,7 +33,7 @@ async function handleRidrectURL(req, res) {
   }
   res.redirect(entry.redirectURL);
 }
-
+// function for handling Analytics
 async function handleGetAnalytics(req, res) {
   const shortId = req.params.shortId;
   const result = await URL.findOne({ shortId });
@@ -46,7 +47,7 @@ async function handleGetAnalytics(req, res) {
   });
 }
 
-// exports
+// exports the functions
 module.exports = {
   handleGenerateNewShortURL,
   handleRidrectURL,
