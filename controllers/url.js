@@ -9,7 +9,7 @@ async function handleGenerateNewShortURL(req, res) {
     }
     const shortID = shortid();
     await URL.create({shortId : shortID, redirectURL : req.body.url, visitHistory : []});
-    return res.json({id: shortID});
+    return res.render("home", {id: shortID});
 };
 async function handleRidrectURL(req, res){
         const shortId = req.params.shortId;
@@ -37,6 +37,7 @@ async function handleGetAnalytics(req, res){
         totalClicks: result.visitHistory.length,
         analytics: result.visitHistory});
 }
+
 module.exports = {
     handleGenerateNewShortURL,
     handleRidrectURL,
