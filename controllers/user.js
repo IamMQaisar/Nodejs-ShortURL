@@ -19,8 +19,8 @@ async function handleUserSignin(req, res) {
     const user = await User.findOne({ email, password });
     if (user) {
       const token = setUser(user);
-      res.cookie("uid", token);
-      return res.redirect("/");
+      console.log(token);
+      return res.json({ token });
     } else {
       return res.end("User not found");
     }
