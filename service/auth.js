@@ -1,13 +1,21 @@
 // Map to store sessionID to user mapping
-const sessionIDtoUserMap = new Map();
+// const
+const jwt = require("jsonwebtoken");
+const secret = process.env.myLittleSecretKey;
 
 // Function to set and get user in the map
-function setUser(id, user) {
-  return sessionIDtoUserMap.set(id, user);
+function setUser(user) {
+  return jwt.sign({ _id: user._id, email: user.email }, secret);
 }
-
-function getUser(id) {
-  return sessionIDtoUserMap.get(id);
+function getUser(token) {
+  if (!token) {
+    return null;
+  }
+  try {
+    return jwt.verify(token, secret);
+  } catch (e) {
+    return null;
+  }
 }
 
 // Export the functions
