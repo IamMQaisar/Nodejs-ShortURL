@@ -1,5 +1,6 @@
 // imports the User model and uuid module
 const User = require("../models/user");
+const { v4: uuidv4 } = require("uuid");
 const { setUser } = require("../service/auth");
 
 // functions for handling user signup and signin
@@ -18,8 +19,9 @@ async function handleUserSignin(req, res) {
   try {
     const user = await User.findOne({ email, password });
     if (user) {
-      const token = setUser(user);
-      res.cookie("uid", token);
+      const sessionId = uuidv4();
+      setUser(sessionId, user);
+      res.cookie("uid", sessionId);
       return res.redirect("/");
     } else {
       return res.end("User not found");
